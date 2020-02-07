@@ -45,7 +45,7 @@ close(con)
 con <- file("./uci_har_dataset/test/y_test.txt")
 y_test <- readLines(con)
 close(con)
-y_label <- "activity_label"
+y_label <- "activity_id"
 df_train <- cbind(X_train, y_train)
 names(df_train)[length(df_train)] = y_label
 df_test <- cbind(X_test, y_test)
