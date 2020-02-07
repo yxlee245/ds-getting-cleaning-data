@@ -30,8 +30,34 @@ X_train <- read.table("./uci_har_dataset/train/X_train.txt", header = FALSE, sep
 X_test <- read.table("./uci_har_dataset/test/X_test.txt", header = FALSE, sep = "",
                      col.names = feature_names)
 
+# Read in y_train and y_test and add to X_train and X_test respectively
+con <- file("./uci_har_dataset/train/y_train.txt")
+y_train <- readLines(con)
 close(con)
+con <- file("./uci_har_dataset/test/y_test.txt")
+y_test <- readLines(con)
+close(con)
+y_label <- "activity_label"
+df_train <- cbind(X_train, y_train)
+names(df_train)[length(df_train)] = y_label
+df_test <- cbind(X_test, y_test)
+names(df_test)[length(df_test)] = y_label
 
+# Read in subject IDs and add to df_train and df_test
+con <- file("./uci_har_dataset/train/subject_train.txt")
+subjects_train <- readLines(con)
+close(con)
+con <- file("./uci_har_dataset/test/subject_test.txt")
+subjects_test <- readLines(con)
+close(con)
+subject_id_label <- "subject_id"
+df_train <- cbind(subjects_train, df_train)
+names(df_train)[1] <- subject_id_label
+df_test <- cbind(subjects_test, df_test)
+names(df_test)[1] <- subject_id_label
+
+# Merge training and test set
+df_all <- rbind(df_train, df_test)
 
 ## Extracts only the measurements on the mean and standard deviation for each measurement.
 
