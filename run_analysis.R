@@ -67,8 +67,22 @@ names(df_test)[1] <- subject_id_label
 # Merge training and test set
 df_all <- rbind(df_train, df_test)
 
-## Uses descriptive activity names to name the activities in the data set
+# Read in activity descriptions
+# and create dataframe with activity_id and activity_desc as columns
+con <- file("./uci_har_dataset/activity_labels.txt")
+activity_labels <- readLines(con)
+close(con)
+activity_id <- sapply(strsplit(activity_labels, " "),
+                      function(split_items) {split_items[1]})
+activity_desc <- sapply(strsplit(activity_labels, " "),
+                        function(split_items) {tolower(split_items[2])})
+activity_df <- data.frame(activity_id, activity_desc)
 
+# Merge df_all and activity_df by 
+df_all <- merge(df_all, activity_df, by = "activity_id", all = FALSE)
+
+# Remove "activity_id" column in df_all
+df_all <- df_all[, !(names(df_all) %in% c(y_label))]
 
 ## From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
