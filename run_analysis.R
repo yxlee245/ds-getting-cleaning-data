@@ -30,6 +30,14 @@ X_train <- read.table("./uci_har_dataset/train/X_train.txt", header = FALSE, sep
 X_test <- read.table("./uci_har_dataset/test/X_test.txt", header = FALSE, sep = "",
                      col.names = feature_names)
 
+# Create logical vector with same length as column names of X_train and X_test
+# TRUE when name contains the string "mean" or "std", false otherwise
+is_mean_or_std_name <- grepl("_mean$|_mean_|_std", feature_names)
+
+# Choose only mean and standard deviation of measurements
+X_train <- X_train[,is_mean_or_std_name]
+X_test <- X_test[,is_mean_or_std_name]
+
 # Read in y_train and y_test and add to X_train and X_test respectively
 con <- file("./uci_har_dataset/train/y_train.txt")
 y_train <- readLines(con)
@@ -58,9 +66,6 @@ names(df_test)[1] <- subject_id_label
 
 # Merge training and test set
 df_all <- rbind(df_train, df_test)
-
-## Extracts only the measurements on the mean and standard deviation for each measurement.
-
 
 ## Uses descriptive activity names to name the activities in the data set
 
