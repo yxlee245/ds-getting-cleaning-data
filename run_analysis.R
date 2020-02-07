@@ -31,7 +31,7 @@ X_test <- read.table("./uci_har_dataset/test/X_test.txt", header = FALSE, sep = 
                      col.names = feature_names)
 
 # Create logical vector with same length as column names of X_train and X_test
-# TRUE when name contains the string "mean" or "std", false otherwise
+# TRUE when name contains the string "mean" or "std", FALSE otherwise
 is_mean_or_std_name <- grepl("_mean$|_mean_|_std", feature_names)
 
 # Choose only mean and standard deviation of measurements
