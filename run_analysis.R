@@ -12,9 +12,24 @@ feature_names <-
   strsplit(" ") %>%
   # Get second item in character vector in every list item
   sapply(function(split_items) {split_items[2]})
+close(con)
 
-# Remove parentheses in feature names
-feature_names <- gsub("[()]", "", feature_names)
+# Remove empty parentheses "()" in feature names and replace dashes with underscores
+feature_names <- gsub("[(][)]", "", feature_names)
+feature_names <- gsub("-", "_", feature_names)
+
+# Replace letter "t" with "time_" and "f" with "freq_" at the beginning of each feature name,
+# and change all feature names to lower case
+feature_names <- sub("^t", "time_", feature_names)
+feature_names <- sub("^f", "freq_", feature_names)
+feature_names <- tolower(feature_names)
+
+# Read in X_train and X_test and add feature names
+X_train <- read.table("./uci_har_dataset/train/X_train.txt", header = FALSE, sep = "",
+                      col.names = feature_names)
+X_test <- read.table("./uci_har_dataset/test/X_test.txt", header = FALSE, sep = "",
+                     col.names = feature_names)
+
 close(con)
 
 
