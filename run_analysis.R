@@ -1,7 +1,10 @@
 ### R script to clean Human Activity Recognition (HAR) data into tidy format ###
 
-# Load libraries
+## Load libraries ----
 library(dplyr)
+
+
+## Preprocess feature names ----
 
 # Read in raw names of features and put through preprocess pipes
 con <- file("./uci_har_dataset/features.txt")
@@ -23,6 +26,9 @@ feature_names <- gsub("-", "_", feature_names)
 feature_names <- sub("^t", "time_", feature_names)
 feature_names <- sub("^f", "freq_", feature_names)
 feature_names <- tolower(feature_names)
+
+
+## Merge data from multiple sources ----
 
 # Read in X_train and X_test and add feature names
 X_train <- read.table("./uci_har_dataset/train/X_train.txt", header = FALSE, sep = "",
@@ -84,5 +90,20 @@ df_all <- merge(df_all, activity_df, by = "activity_id", all = FALSE)
 # Remove "activity_id" column in df_all
 df_all <- df_all[, !(names(df_all) %in% c(y_label))]
 
-## From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
+## Aggregate and output tidy data ----
+
+# Convert df_all into tibble format and group tibble by activity and subject
+# then compute average (mean) for each variable in tibble_grouped
+tibble_avg <-
+  df_all %>%
+  tbl_df %>%
+  group_by(subject_id, activity_desc) %>%
+  summarize_at(feature_names[is_mean_or_std_name], mean)
+
+# Add "avg_" to the feature names
+names(tibble_avg)[3:ncol(tibble_avg)] <-
+  sub("^", "avg_", names(tibble_avg)[3: ncol(tibble_avg)])
+
+# Output tibble
+write.csv(tibble_avg, file = "./outputs/har_data_tidy.csv", row.names = FALSE)
