@@ -14,7 +14,7 @@ ds-getting-cleaning-data
 ```
 The raw data can be found in the `uci_har_dataset` folder, while the final tidy data file can be found in the `outputs` folder.
 
-## Summary of Processes in `run_analysis.R`
+## Processes in `run_analysis.R`
 The following are the main processes that occur within `run_analysis.R`:
 1. Preprocessing of feature names: This includes removing unnecessary characters such as empty parentheses ("()") and replacing the first letter with words (e.g. "t...." to "time_....") to make it easier to understand what each feature is.
 2. Merging data from multiple sources: Raw data such as measurement readings, activity IDs, and activity descriptions are placed in several different files within the `uci_har_dataset` folder. This process reads in the information from such files, and merges them appropriately. In this step, only the mean and standard deviation of measurements are kept as features for the resulting dataset. Preprocessing of activity descriptions is also done in this process.
