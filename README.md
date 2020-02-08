@@ -12,7 +12,7 @@ ds-getting-cleaning-data
    |- test
    |- train
 ```
-The raw data can be found in the `uci_har_dataset` folder, while the final tidy data file can be found in the `outputs` folder.
+The raw data files can be found in the `uci_har_dataset` folder, while the final tidy data file can be found in the `outputs` folder.
 
 ## Processes in `run_analysis.R`
 The following are the main processes that occur within `run_analysis.R`:
