@@ -105,4 +105,4 @@ names(tibble_avg)[3:ncol(tibble_avg)] <-
   sub("^", "avg_", names(tibble_avg)[3: ncol(tibble_avg)])
 
 # Output tibble
-write.csv(tibble_avg, file = "./outputs/har_data_tidy.csv", row.names = FALSE)
+write.table(tibble_avg, file = "./outputs/har_data_tidy.txt", row.names = FALSE)
