@@ -84,10 +84,9 @@ activity_desc <- sapply(strsplit(activity_labels, " "),
                         function(split_items) {tolower(split_items[2])})
 activity_df <- data.frame(activity_id, activity_desc)
 
-# Merge df_all and activity_df by 
+# Merge df_all and activity_df by "activity_id"
+# and remove "activity_id" column in df_all
 df_all <- merge(df_all, activity_df, by = "activity_id", all = FALSE)
-
-# Remove "activity_id" column in df_all
 df_all <- df_all[, !(names(df_all) %in% c(y_label))]
 
 
