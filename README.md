@@ -19,6 +19,7 @@ The following are the main processes that occur within `run_analysis.R`:
 1. Preprocessing of feature names: This includes removing unnecessary characters such as empty parentheses ("()") and replacing the first letter with words (e.g. "t...." to "time_....") to make it easier to understand what each feature is.
 2. Merging data from multiple sources: Raw data such as measurement readings, activity IDs, and activity descriptions are placed in several different files within the `uci_har_dataset` folder. This process reads in the information from such files, and merges them appropriately. In this step, only the mean and standard deviation of measurements are kept as features for the resulting dataset. Preprocessing of activity descriptions is also done in this process.
 3. Aggregating and outputting tidy data: This involves grouping the data by activity and subject, and getting the average values of the features for every group. The final step is to output the tidy data to the `outputs` folder in CSV format.
+The processes are described in more detail in `CodeBook.md`.
 
 ## Note
 1. The `run_analysis.R` script requires the `dplyr` package to work. To install the package, run the following command in the R console:
