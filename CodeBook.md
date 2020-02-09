@@ -1,7 +1,8 @@
 # Description of tidy version of the Human Activity Recognition (HAR) Dataset
 
 ## Description of Data Fields in Tidy Data
-_Refer to `./uci_har_dataset/README.txt` for the description of variables in the raw dataset_<br>
+_Refer to `./uci_har_dataset/README.txt` for the description of variables in the raw dataset_
+
 Field Number | Field Label | Type | Description
 ------------ | ----------- | ---- | -----------
 01 | subject_id | charcter | ID of sbjects, from 1 to 30
