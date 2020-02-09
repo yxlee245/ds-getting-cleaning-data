@@ -3,7 +3,7 @@
 ## Description of Data Fields in Tidy Data
 _Refer to `./uci_har_dataset/README.txt` for the description of variables in the raw dataset_<br>
 Field Number | Field Label | Type | Description
----|---|---|---
+--- | --- | --- | ---
 01 | subject_id | charcter | ID of sbjects, from 1 to 30
 02 | activity_desc | character | one of the following six types of activities: "walking", "walking_upstairs", "walking_downstairs", "sitting", "standing", "laying"
 03 | avg_time_bodyacc_mean_x | numeric | aggregated and averaged by subject and activity, in the range [-1, 1]
